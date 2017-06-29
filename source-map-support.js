@@ -86,14 +86,10 @@ retrieveFileHandlers.push(function(path) {
   return fileContentsCache[path] = contents;
 });
 
-// Support URLs relative to a directory, but be careful about a protocol prefix
+// Support URLs to a directory, but be careful about a protocol prefix
 // in case we are in the browser (i.e. directories may start with "http://")
 function supportRelativeURL(file, url) {
-  if (!file) return url;
-  var dir = path.dirname(file);
-  var match = /^\w+:\/\/[^\/]*/.exec(dir);
-  var protocol = match ? match[0] : '';
-  return protocol + path.resolve(dir.slice(protocol.length), url);
+  return url;
 }
 
 function retrieveSourceMapURL(source) {
